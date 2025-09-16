@@ -59,9 +59,9 @@ void console::remove_a_task()
 
             else if (todo_list.valid_id(id))
             {
-                std::cout << "The Task With Ttite: '";
-                std::cout << todo_list.return_title(id);
-                std::cout << "' will be deleted\n";
+                std::cout << "The Task With Title: '"
+                          << todo_list.return_title(id)
+                          << "' will be deleted\n";
                 std::cout << "Enter y for 'Yes' & Any other key for 'No'\n";
                 char choice;
                 std::cin >> choice;

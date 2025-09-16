@@ -3,8 +3,8 @@
 add_executable(todo_app
     src/main.cpp
     src/console.cpp
-    src/manager.cpp
-    src/todo_data_type.cpp # Add this if you create a .cpp for it
+    src/todo_header.cpp
+
 )
 
 # tells the target where to find the header files

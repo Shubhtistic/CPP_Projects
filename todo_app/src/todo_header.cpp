@@ -133,7 +133,7 @@ std::string manager::return_title(const int &id) const
 
     for (int i = 0; i < task_vector.size(); ++i)
     {
-        std::string temp;
+
         if (task_vector[i].return_id() == id)
         {
             temp = task_vector[i].show_title();
