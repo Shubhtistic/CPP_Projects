@@ -63,7 +63,7 @@ Or in the folder you used for build
 ### 🔹 Windows (PowerShell or Developer Command Prompt)
 - Clone repository
 ```bash
-git clone <your-portfolio-repo-url>
+git clone https://github.com/shubh4m-2k04/CPP_Projects
 cd C++-Projects\todo-app
 ```
 

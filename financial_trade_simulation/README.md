@@ -54,8 +54,8 @@ Please make sure you have the following installed:
 
 1.  **Clone the repository and navigate to the project folder:**
     ```bash
-    git clone <your-repo-url>
-    cd <your-repo-folder>/financial-sim
+    git clone https://github.com/shubh4m-2k04/CPP_Projects
+    cd C++-Projects/financial-sim
     ```
 2.  **Create a build directory and compile:**
     ```bash
@@ -73,8 +73,8 @@ Or in the folder you used for build
 ### 🔹 Windows (Using PowerShell)
 1.  **Clone the repository and navigate to the project folder:**
     ```bash
-    git clone <your-repo-url>
-    cd <your-repo-folder>\financial-sim
+    git clone https://github.com/shubh4m-2k04/CPP_Projects
+    cd C++-Projects\financial-sim
     ```
 2.  **Create a build directory and compile:**
     ```bash
