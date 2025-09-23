@@ -28,7 +28,7 @@ This project is part of my larger C++ portfolio, but is also a complete, standal
 
 ## ⚙️ Prerequisites
 Please make sure you already have:
-- A **C++17 compiler** (GCC/Clang/MSVC)
+- **C++17 compiler** (GCC/Clang/MSVC)
 - **CMake** (v3.14+)
 - **Git**
 
