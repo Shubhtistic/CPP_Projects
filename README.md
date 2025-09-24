@@ -12,16 +12,14 @@ My larger, "flagship" projects (such as my planned "Redis from Scratch" implemen
 
 ## 📂 Project Index
 
-| Project                                         | Details                                                                                  |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| 🚀 **[To-Do List Application](https://github.com/shubh4m-2k04/CPP_Projects/tree/main/todo_app)**       | A robust, persistent command-line task manager showcasing **Separation of Concerns**, **RAII**, **JSON Serialization**, **CMake**, and **Robust Error Handling**. |
-| 📈 **[Financial Trading Sim][trading-link]**     | _(Next Up)_ A simulation of a financial portfolio system demonstrating **Polymorphism**, **Inheritance**, **Virtual Functions**, **Smart Pointers**, and **Advanced OOP Design**. |
-| 📊 **[Log File Analyzer][log-link]**             | _(Planned)_ A high-performance server log analysis tool applying **STL Algorithms**, **Lambdas**, **String Parsing**, and **Data Aggregation**. |
-| 🕷️ **[Web Scraper][scraper-link]**              | _(Planned)_ A concurrent web crawler featuring **Multithreading** (`std::thread`, `std::mutex`), **Networking**, **HTML Parsing**, and **Concurrent Data Structures**. |
+| Project                                                                                              | Details                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🕷️ **[High-Performance Web Crawler]** | _(Planned)_ A complex systems project integrating networking with advanced concurrency via a custom **Thread Pool** (`std::mutex`, `std::condition_variable`).                     |
+| 🔑 **[Key-Value Store]** | _(Planned)_ A backend-focused in-memory database using efficient data structures (`std::unordered_map`) and modern C++ features like **`std::optional`** for clean API design. |
+| 📊 **[Log File Analyzer]** | _(Next Up)_ A high-performance utility applying advanced **STL Algorithms**, **Lambdas**, and efficient **String Parsing** for data aggregation.                                |
+| 📈 **[Financial Trading Simulation](https://github.com/shubh4m-2k04/CPP_Projects/tree/main/financial_trade_simulation)** | A simulation demonstrating advanced **OOP** concepts, including **Polymorphism**, **Abstract Classes**, and modern memory management with **Smart Pointers**.                    |
+| ✅ **[To-Do List Application](https://github.com/shubh4m-2k04/CPP_Projects/tree/main/todo_app)** | A robust application demonstrating fundamentals in **File I/O**, **JSON Data Persistence**, **RAII**, and professional project structure with **CMake**.                      |
 
-[trading-link]: ./financial-trading-sim
-[log-link]: ./log-file-analyzer
-[scraper-link]: ./web-scraper
 
 
 ## ⚙️ Prerequisites

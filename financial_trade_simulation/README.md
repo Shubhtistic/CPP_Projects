@@ -62,10 +62,13 @@ Please make sure you have the following installed:
     mkdir build && cd build
     cmake ..
     make
+    #or optinally
+    make trading_sim
+    # to only make the trading_sim executable only
     ```
 3.  **Run the application:**
     ```bash
-    ./TradingSim
+    ./trading_sim
     ```
     The executable file will be in build directory
 Or in the folder you used for build
@@ -85,7 +88,7 @@ Or in the folder you used for build
     ```
 3.  **Run the application:**
     ```bash
-    .\Debug\TradingSim.exe
+    .\Debug\trading_sim.exe
     ```
 
 ---
