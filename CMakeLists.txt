@@ -25,4 +25,4 @@ FetchContent_MakeAvailable(nlohmann_json)
 add_subdirectory(todo_app)
 
 #for future
-# add_subdirectory(financial-trading-sim)
+add_subdirectory(financial_trade_simulation)

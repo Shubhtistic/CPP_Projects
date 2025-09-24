@@ -51,6 +51,9 @@ cd C++-Projects/todo-app
 mkdir build && cd build
 cmake ..
 make
+#or 
+cmake todo_app
+#to only make the todo_app executable file
 ```
 
 - Run application

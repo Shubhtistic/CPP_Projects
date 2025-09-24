@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # This command creates our final executable program, named "TradingSim"
 # All the .cpp file paths are with "src/" so CMake knows where to find them.
-add_executable(TradingSim
+add_executable(trading_sim
     src/main.cpp
     src/Portfolio.cpp
     src/Stock.cpp
@@ -19,4 +19,4 @@ add_executable(TradingSim
 
 # This now tells our "TradingSim" target to
 # look for header files (.h) inside the "include" directoryy
-target_include_directories(TradingSim PRIVATE include)
+target_include_directories(trading_sim PRIVATE include)

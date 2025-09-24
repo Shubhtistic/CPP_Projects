@@ -60,8 +60,9 @@ void Portfolio::pass_time()
 void Portfolio::display() const
 {
 
-    std::cout << "THe Current Total Balance is "
-              << total_cash << std::fixed << std::setprecision(3) << std::endl;
+    std::cout << "The Current Total Balance is "
+              << std::fixed << std::setprecision(3)
+              << total_cash << std::endl;
 
     std::cout << "============= HOLDINGS!! ================\n";
     if (holdings.empty())

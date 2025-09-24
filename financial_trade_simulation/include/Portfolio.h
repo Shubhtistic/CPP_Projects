@@ -4,11 +4,11 @@
 
 class Portfolio
 {
-    double initial_cash;
+    double total_cash;
     std::map<Asset *, int> holdings;
 
 public:
-    Portfolio(double start_cash) : initial_cash(start_cash) {}
+    Portfolio(double start_cash) : total_cash(start_cash) {}
 
     bool buy(Asset *asset, int quantity);
     bool sell(Asset *asset, int quantity);
