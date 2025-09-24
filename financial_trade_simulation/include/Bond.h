@@ -1,3 +1,4 @@
+#pragma once
 #include "Asset.h"
 
 class Bond : public Asset

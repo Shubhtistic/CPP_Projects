@@ -24,5 +24,5 @@ FetchContent_MakeAvailable(nlohmann_json)
 # CMake will now go inside the todo app folder for its own CMakeLists.txt.
 add_subdirectory(todo_app)
 
-#for future
 add_subdirectory(financial_trade_simulation)
+
