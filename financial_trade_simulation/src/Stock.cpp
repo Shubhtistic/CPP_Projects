@@ -1,6 +1,6 @@
 #include "Stock.h"
 #include <random>
-Stock::Stock(const std::string &symbol1, double price) : Asset(symbol1, price) {}
+Stock::Stock(const std::string &symbol_given, double price_given) : Asset(symbol_given, price_given) {}
 
 double Stock::get_value() const
 {
