@@ -20,3 +20,11 @@ add_executable(trading_sim
 # This now tells our "TradingSim" target to
 # look for header files (.h) inside the "include" directoryy
 target_include_directories(trading_sim PRIVATE include)
+
+
+#when we run our program the csv file will be imn the root directory so our program wont be able to find it
+#but using this we copy the file to the build directory
+#so when we run the program it will be able to find it
+#this command copies the market_assets.csv file to the build directory
+
+file(COPY market_assets.csv DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
