@@ -8,9 +8,9 @@ protected:
     double current_price;
 
 public:
-    Asset(const std::string &symbol1, double current_price1) : symbol(symbol1), current_price(current_price1) {}
+    Asset(const std::string &symbol_given, double current_price_given) : symbol(symbol_given), current_price(current_price_given) {}
 
     virtual double tick() = 0;
     virtual double get_value() const = 0;
-    std::string get_symbol() { return symbol; }
+    std::string get_symbol() const { return symbol; }
 };
