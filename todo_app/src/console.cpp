@@ -1,47 +1,49 @@
+
 #include "console.h"
 #include <iostream>
 #include <limits>
 #include <cstdlib>
 
-void console::add_a_task()
+    void
+    console::add_a_task()
 {
     std::string title, description;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    std::cout << "Enter the title of the task: ";
+    std::cout << "Please enter a title for the task: ";
     std::getline(std::cin, title);
-    std::cout << "Enter the description of the task: ";
+    std::cout << "Now, enter a description: ";
     std::getline(std::cin, description);
     if (title.empty())
     {
-        title = "No Title given For this Task";
+        title = "Untitled Task";
     }
     if (description.empty())
     {
-        description = "No Description Given";
+        description = "No description provided.";
     }
     todo_list.emplace_task(title, description);
-    std::cout << "Added New Task Successfuly With Task ID: " << todo_list.id_count() - 1 << std::endl;
+    std::cout << "Success! Your new task has been added with ID: " << todo_list.id_count() - 1 << std::endl;
 }
 
 void console::remove_a_task()
 {
     if (todo_list.is_empty())
     {
-        std::cout << "Currently there are no Tasks\nExited";
+        std::cout << "The to-do list is currently empty. There's nothing to remove.\n";
     }
     else
     {
         while (true)
         {
             int id;
-            std::cout << "Enter the ID number of the Task you want to delete\n";
+            std::cout << "Please enter the ID of the task you'd like to delete: ";
             std::cin >> id;
 
             if (std::cin.fail())
             {
-                std::cout << "You have Not Entered an Number!!\n";
-                std::cout << "You want to try again? Enter y for 'Yes', Any other key means 'No'\n";
+                std::cout << "Oops! That wasn't a number.\n";
+                std::cout << "Would you like to try again? (y/n): ";
 
                 char choice;
                 std::cin >> choice;
@@ -56,19 +58,17 @@ void console::remove_a_task()
                     break;
                 }
             }
-
             else if (todo_list.valid_id(id))
             {
-                std::cout << "The Task With Title: '"
-                          << todo_list.return_title(id)
-                          << "' will be deleted\n";
-                std::cout << "Enter y for 'Yes' & Any other key for 'No'\n";
+                std::cout << "The following task will be permanently deleted:\n"
+                          << "Title: '" << todo_list.return_title(id) << "'\n";
+                std::cout << "Are you sure you want to delete this task? (y/n): ";
                 char choice;
                 std::cin >> choice;
                 if (choice == 'y' || choice == 'Y')
                 {
                     todo_list.erase_task(id);
-                    std::cout << "The Task Has Been Deleted!!\n";
+                    std::cout << "The task has been successfully deleted.\n";
                     break;
                 }
                 else
@@ -78,7 +78,7 @@ void console::remove_a_task()
             }
             else
             {
-                std::cout << "Any Task With this ID does Not exist You want to Enter ID again\nEnter y for 'Yes' &  Press any other key for 'No'\n";
+                std::cout << "Sorry, no task was found with that ID. Would you like to try a different ID? (y/n): ";
                 char choice;
                 std::cin >> choice;
                 if (choice == 'y' || choice == 'Y')
@@ -89,7 +89,7 @@ void console::remove_a_task()
                 }
                 else
                 {
-                    std::cout << "Goodbye!!\n";
+                    std::cout << "Exiting task removal.\n";
                     break;
                 }
             }
@@ -101,13 +101,13 @@ void console::set_as_complete()
 {
     while (true)
     {
-        std::cout << "Enter the Task ID of task to be Completed\n";
+        std::cout << "Please enter the ID of the task to mark as complete: ";
         int id;
         std::cin >> id;
         if (std::cin.fail())
         {
-            std::cout << "You D-d Not Enter a Numbered ID!!\n";
-            std::cout << "You want to try again? Enter y for 'Yes', Any other key means 'No'\n";
+            std::cout << "Oops! Please enter a valid number for the ID.\n";
+            std::cout << "Would you like to try again? (y/n): ";
 
             char choice;
             std::cin >> choice;
@@ -122,28 +122,24 @@ void console::set_as_complete()
                 break;
             }
         }
-
         else if (todo_list.valid_id(id))
         {
             if (todo_list.return_status(id) == true)
             {
-                std::cout << "The task with ID NO. " << id << " & Title: '" << todo_list.return_title(id) << "'\n";
-                std::cout << "Is already Set as Completed\n";
+                std::cout << "The task with ID " << id << " ('" << todo_list.return_title(id) << "') is already marked as complete.\n";
                 break;
             }
-
             else
             {
-                std::cout << "The Title of task you want to set as complete\nTitle: " << todo_list.return_title(id) << std::endl;
-
-                std::cout << "\nAre You Sure? Enter y for 'yes' and any other key for 'No'\n";
+                std::cout << "You are about to mark the following task as complete:\n"
+                          << "Title: " << todo_list.return_title(id) << std::endl;
+                std::cout << "Are you sure? (y/n): ";
                 char choice;
                 std::cin >> choice;
-                if (choice == 'y' || choice == 'y')
+                if (choice == 'y' || choice == 'Y')
                 {
                     todo_list.mark_complete(id);
-
-                    std::cout << "The Task Now Has Been Set as Completed\n";
+                    std::cout << "Great! The task has been marked as complete.\n";
                     break;
                 }
                 else
@@ -154,8 +150,8 @@ void console::set_as_complete()
         }
         else
         {
-            std::cout << "You Entered a wrong ID!!\n";
-            std::cout << "You want to try again? Enter y for 'Yes', Any other key means 'No'\n";
+            std::cout << "Sorry, that ID is invalid.\n";
+            std::cout << "Would you like to try again? (y/n): ";
 
             char choice;
             std::cin >> choice;
@@ -165,10 +161,9 @@ void console::set_as_complete()
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 continue;
             }
-
             else
             {
-                std::cout << "Goodbye!!\n";
+                std::cout << "Returning to the main menu.\n";
                 break;
             }
         }
@@ -179,14 +174,13 @@ void console::set_as_pending()
 {
     while (true)
     {
-        std::cout << "Enter the Task ID of task to be Set as Pending\n";
+        std::cout << "Please enter the ID of the task to mark as pending: ";
         int id;
         std::cin >> id;
         if (std::cin.fail())
         {
-
-            std::cout << "You Did Not Enter a Numbered ID!!\n";
-            std::cout << "You want to try again? Enter y for 'Yes', Any other key means 'No'\n";
+            std::cout << "Oops! Please enter a valid number for the ID.\n";
+            std::cout << "Would you like to try again? (y/n): ";
 
             char choice;
             std::cin >> choice;
@@ -201,29 +195,24 @@ void console::set_as_pending()
                 break;
             }
         }
-
         else if (todo_list.valid_id(id))
         {
             if (todo_list.return_status(id) == false)
             {
-                std::cout << "The task with ID NO. " << id << " & Title: ";
-                std::cout << todo_list.return_title(id);
-                std::cout << "\nIs already Set as Pending\n";
+                std::cout << "The task with ID " << id << " ('" << todo_list.return_title(id) << "') is already marked as pending.\n";
                 break;
             }
-
-            else if (todo_list.valid_id(id))
+            else
             {
-                std::cout << "The Title of task you want to set as Pending\nTitle: " << todo_list.return_title(id);
-
-                std::cout << "\nAre You Sure? Enter y for 'yes' and any other key for 'No'\n";
+                std::cout << "You are about to mark the following task as pending:\n"
+                          << "Title: " << todo_list.return_title(id) << std::endl;
+                std::cout << "Are you sure? (y/n): ";
                 char choice;
                 std::cin >> choice;
-                if (choice == 'y' || choice == 'y')
+                if (choice == 'y' || choice == 'Y')
                 {
                     todo_list.mark_pending(id);
-
-                    std::cout << "The Task Now Has Been Set as Pending!!\n";
+                    std::cout << "Okay, the task has been marked as pending.\n";
                     break;
                 }
                 else
@@ -234,8 +223,8 @@ void console::set_as_pending()
         }
         else
         {
-            std::cout << "You Entered a wrong ID!!\n";
-            std::cout << "You want to try again? Enter y for 'Yes', Any other key means 'No'\n";
+            std::cout << "Sorry, that ID is invalid.\n";
+            std::cout << "Would you like to try again? (y/n): ";
 
             char choice;
             std::cin >> choice;
@@ -245,10 +234,9 @@ void console::set_as_pending()
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 continue;
             }
-
             else
             {
-                std::cout << "Goodbye!!\n";
+                std::cout << "Returning to the main menu.\n";
                 break;
             }
         }
@@ -259,30 +247,28 @@ void console::print_pending_tasks() const
 {
     if (todo_list.is_empty())
     {
-        std::cout << "OOPS! it looks there are no Tasks Currently -_-\n";
+        std::cout << "Your to-do list is empty! ✨\n";
     }
     else
     {
         bool found_pending = false;
-        std::cout << "=====================================================\n";
+        std::cout << "--- Pending Tasks ---\n\n";
         const auto &all_tasks = todo_list.get_all_tasks();
         for (const auto &task : all_tasks)
         {
             if (task.is_completed() == false)
             {
-
                 found_pending = true;
-                std::cout << "ID: " << task.return_id() << "\n";
-                std::cout << "Title: " << task.show_title() << "\n";
+                std::cout << "ID:          " << task.return_id() << "\n";
+                std::cout << "Title:       " << task.show_title() << "\n";
                 std::cout << "Description: " << task.show_description() << "\n";
-                std::cout << "Task: Pending(Not Completed)\n";
-                std::cout << "\n";
-                std::cout << "===============================================\n";
+                std::cout << "Status:      Pending\n";
+                std::cout << "---------------------\n";
             }
         }
         if (!found_pending)
         {
-            std::cout << "There are no pending tasks.\n";
+            std::cout << "Great job! You have no pending tasks.\n";
         }
     }
 }
@@ -291,30 +277,26 @@ void console::print_all_tasks() const
 {
     if (todo_list.is_empty())
     {
-        std::cout << "OOPS! it looks there are no Tasks Currently -_-\n";
+        std::cout << "Your to-do list is empty! ✨\n";
     }
     else
     {
-        std::cout << "=====================================================\n";
+        std::cout << "--- All Tasks ---\n\n";
         const auto &all_tasks = todo_list.get_all_tasks();
         for (const auto &task : all_tasks)
         {
-
-            std::cout << "ID: " << task.return_id() << "\n";
-            std::cout << "Title: " << task.show_title() << "\n";
+            std::cout << "ID:          " << task.return_id() << "\n";
+            std::cout << "Title:       " << task.show_title() << "\n";
             std::cout << "Description: " << task.show_description() << "\n";
             if (task.is_completed() == false)
             {
-
-                std::cout << "Task: Pending(Not Completed)\n";
+                std::cout << "Status:      Pending\n";
             }
             else
             {
-                std::cout << "Task: Completed -_-\n";
+                std::cout << "Status:      Completed\n";
             }
-
-            std::cout << "\n";
-            std::cout << "===============================================\n";
+            std::cout << "---------------------\n";
         }
     }
 }
@@ -323,27 +305,24 @@ void console::view_or_edit()
 {
     if (todo_list.is_empty())
     {
-        std::cout << "Oops! Looks Like there is no Task to View Or Edit\n";
-        std::cout << "\n=====================================================\n";
+        std::cout << "Your to-do list is empty, so there's nothing to view or edit.\n";
     }
     else
     {
         while (true)
         {
-            std::cout << "Enter the ID Of the Task To be Edited or Previewed\n";
-            std::cout << "==========================================================\n";
+            std::cout << "Please enter the ID of the task you want to view or edit: ";
             int id;
             std::cin >> id;
             if (std::cin.fail())
             {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                std::cout << "You Did not enter Numbered ID, Do you Want to try Again\nEnter y for 'Yes' & Any other key to to say 'No'\n";
+                std::cout << "That wasn't a valid number. Would you like to try again? (y/n): ";
                 char choice;
                 std::cin >> choice;
                 if (choice == 'y' || choice == 'Y')
                 {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                     continue;
                 }
                 else
@@ -354,60 +333,54 @@ void console::view_or_edit()
             else if (todo_list.valid_id(id))
             {
                 std::string new_title, new_desc;
-                std::cout << "The Title of the task is: " << todo_list.return_title(id) << "\n";
+                std::cout << "\n--- Viewing Task " << id << " ---\n";
+                std::cout << "Current Title: " << todo_list.return_title(id) << "\n";
+                std::cout << "Current Description: " << todo_list.return_description(id) << "\n\n";
 
-                std::cout << "\nThe Description of the task is: " << todo_list.return_description(id) << "\n";
-
-                std::cout << "Do You want to edit the Task Title\n If 'yes' enter y or any other key to decline\n";
+                std::cout << "Would you like to edit the title? (y/n): ";
                 char choice;
                 std::cin >> choice;
                 if (choice == 'y' || choice == 'Y')
                 {
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << "Please Enter new Title Below\n";
+                    std::cout << "Please enter the new title: ";
                     std::getline(std::cin, new_title);
 
-                    if (new_title.empty() != true)
+                    if (!new_title.empty())
                     {
                         todo_list.set_new_title(id, new_title);
                     }
                     else
                     {
-                        std::cout << "You didnt Enter anything Old Title Remains\n";
+                        std::cout << "No new title was entered. The original title remains unchanged.\n";
                     }
                 }
 
-                std::cout << "Do You want to edit the Task Description\n If 'yes' enter y or any other key to decline\n";
+                std::cout << "Would you like to edit the description? (y/n): ";
                 char choice2;
                 std::cin >> choice2;
 
                 if (choice2 == 'y' || choice2 == 'Y')
                 {
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << "Please Enter new Description Below\n";
+                    std::cout << "Please enter the new description: ";
                     std::getline(std::cin, new_desc);
-                    if (new_desc.empty() != true)
+                    if (!new_desc.empty())
                     {
                         todo_list.set_new_description(id, new_desc);
-                        break;
                     }
                     else
                     {
-                        std::cout << "You didnt Enter anything Old Description Remains\n";
-                        break;
+                        std::cout << "No new description was entered. The original description remains unchanged.\n";
                     }
                 }
-                else
-                {
-                    std::cout << "Exited from Editing\n";
-                    break;
-                }
+                std::cout << "Returning to the main menu.\n";
+                break;
             }
             else
             {
-                std::cout << "Not an valid ID NUMBER -_-\n";
-
-                std::cout << "Do you Want to try Again\nEnter y for 'Yes' & Any other key to to say 'No'\n";
+                std::cout << "Sorry, that's not a valid ID.\n";
+                std::cout << "Would you like to try again? (y/n): ";
                 char choice;
                 std::cin >> choice;
                 if (choice == 'y' || choice == 'Y')
@@ -429,14 +402,16 @@ void console::start_console()
 {
     while (true)
     {
-        std::cout << "Enter 1 to Add a Task\n";
-        std::cout << "Enter 2 to Remove a Task\n";
-        std::cout << "Enter 3 to View or Edit to see specific task\n";
-        std::cout << "Enter 4 to Mark a Task as Complete\n";
-        std::cout << "Enter 5 to Mark a Task as Pending\n";
-        std::cout << "Enter 6 to Print Pending Tasks\n";
-        std::cout << "Enter 7 to Print all Tasks\n";
-        std::cout << "Enter 8 to Exit the Program\n";
+        std::cout << "\n--- Main Menu ---\n";
+        std::cout << "1. Add a new task\n";
+        std::cout << "2. Remove a task\n";
+        std::cout << "3. View or edit a task\n";
+        std::cout << "4. Mark a task as complete\n";
+        std::cout << "5. Mark a task as pending\n";
+        std::cout << "6. List pending tasks\n";
+        std::cout << "7. List all tasks\n";
+        std::cout << "8. Exit the program\n";
+        std::cout << "Please enter your choice: ";
 
         int choice;
         std::cin >> choice;
@@ -445,7 +420,7 @@ void console::start_console()
         {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid input. Please enter a number between 1 and 7.\n";
+            std::cout << "Invalid input. Please enter a number between 1 and 8.\n";
             continue;
         }
         else if (choice > 8 || choice < 1)
@@ -464,7 +439,6 @@ void console::start_console()
         case 2:
             remove_a_task();
             break;
-
         case 3:
             view_or_edit();
             break;
