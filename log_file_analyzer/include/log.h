@@ -8,5 +8,4 @@ class log
 
 public:
     log(std::string time_stamp_given, std::string level_given, std::string info_given);
-    void log_parser(std::string log_line);
 };
