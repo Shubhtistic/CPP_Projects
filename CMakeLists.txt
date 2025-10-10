@@ -26,3 +26,5 @@ add_subdirectory(todo_app)
 
 add_subdirectory(financial_trade_simulation)
 
+add_subdirectory(log_file_analyzer)
+
