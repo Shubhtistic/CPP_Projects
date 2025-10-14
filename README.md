@@ -16,7 +16,7 @@ My larger, "flagship" projects (such as my planned "Redis from Scratch" implemen
 | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 🕷️ **[High-Performance Web Crawler]** | _(Planned)_ A complex systems project integrating networking with advanced concurrency via a custom **Thread Pool** (`std::mutex`, `std::condition_variable`).                     |
 | 🔑 **[Key-Value Store]** | _(Planned)_ A backend-focused in-memory database using efficient data structures (`std::unordered_map`) and modern C++ features like **`std::optional`** for clean API design. |
-| 📊 **[Log File Analyzer]** | _(Next Up)_ A high-performance utility applying advanced **STL Algorithms**, **Lambdas**, and efficient **String Parsing** for data aggregation.                                |
+| 📊 **[Log File Analyzer](https://github.com/Shubhtistic/CPP_Projects/tree/main/log_file_analyzer)** | A high-performance utility applying advanced **STL Algorithms**, **Lambdas**, and efficient **String Parsing** for data aggregation.                                |
 | 📈 **[Financial Trading Simulation](https://github.com/shubh4m-2k04/CPP_Projects/tree/main/financial_trade_simulation)** | A simulation demonstrating advanced **OOP** concepts, including **Polymorphism**, **Abstract Classes**, and modern memory management with **Smart Pointers**.                    |
 | ✅ **[To-Do List Application](https://github.com/shubh4m-2k04/CPP_Projects/tree/main/todo_app)** | A robust application demonstrating fundamentals in **File I/O**, **JSON Data Persistence**, **RAII**, and professional project structure with **CMake**.                      |
 
@@ -34,7 +34,7 @@ Please make sure you already have:
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/shubh4m-2k04/CPP_Projects
+    git clone https://github.com/Shubhtistic/CPP_Projects
     cd C++-Projects
     ```
 2.  **Configure and Build:**
