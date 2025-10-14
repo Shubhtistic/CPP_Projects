@@ -59,7 +59,7 @@ The project requires a `market_assets.csv` file in the root directory to define 
 
 1.  **Clone the repository and navigate to the project folder:**
     ```bash
-    git clone git@github.com:shubh4m-2k04/CPP_Projects.git
+    git clone git@github.com:Shubhtistic/CPP_Projects.git
     cd C++_projects/financial_trade_simulation
     ```
 2.  **Create a build directory and compile:**
