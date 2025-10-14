@@ -42,7 +42,7 @@ The `nlohmann/json` library is automatically fetched by CMake.
 
 - Clone repository:
 ```bash
-git clone https://github.com/shubh4m-2k04/CPP_Projects
+git clone https://github.com/Shubhtistic/CPP_Projects
 cd C++-Projects/todo-app
 ```
 
