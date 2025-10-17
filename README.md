@@ -35,7 +35,7 @@ Please make sure you already have:
 1.  **Clone the Repository:**
     ```bash
     git clone https://github.com/Shubhtistic/CPP_Projects
-    cd C++-Projects
+    cd C++_Projects
     ```
 2.  **Configure and Build:**
     ```bash
