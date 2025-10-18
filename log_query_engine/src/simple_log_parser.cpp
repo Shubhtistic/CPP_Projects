@@ -69,3 +69,8 @@ std::optional<log> simple_log_parser::parse_line(const std::string &line)
     return std::nullopt;
     // we return an enpty signal, saying that parsing failed
 }
+
+std::string simple_log_parser::return_parser_name() const
+{
+    return parser_name;
+}
