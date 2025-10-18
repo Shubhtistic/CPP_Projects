@@ -11,7 +11,11 @@ find_package(Threads REQUIRED)
 
 
 add_executable(log_query_engine
-   
+   src/main.cpp
+    src/log_parse_app.cpp
+    src/log_query.cpp
+    src/log_vector.cpp
+    src/simple_log_parser.cpp
 )
 
 
