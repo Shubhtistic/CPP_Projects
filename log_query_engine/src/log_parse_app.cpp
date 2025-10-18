@@ -33,6 +33,29 @@ void log_parse_app::load_logFile()
         return;
     }
 
+    // --- START: Home Directory Expansion ---
+    if (!file_string.empty() && file_string[0] == '~')
+    {
+        std::string home_dir_str;
+        const char *home_env = nullptr;
+        home_env = std::getenv("HOME"); // Unix-like
+        if (!home_env)
+        {
+            home_env = std::getenv("USERPROFILE"); // Windows
+        }
+
+        if (home_env)
+        {
+            home_dir_str = home_env;
+            // Replace the leading "~" with the home directory path
+            file_string.replace(0, 1, home_dir_str);
+        }
+        else
+        {
+            std::cerr << "Warning: Could not determine home directory to expand '~'. Trying path literally.\n";
+        }
+    }
+
     std::filesystem::path file_path(file_string);
     if (!std::filesystem::exists(file_path))
     {
@@ -370,8 +393,13 @@ void log_parse_app::run()
         std::string line;
 
         // using getline + stringstream for input
-        if (std::getline(std::cin, line))
+        if (!std::getline(std::cin, line))
         {
+            if (std::cin.eof())
+            { // Handle Ctrl+D (end of input)
+                std::cout << "\nExiting query loop.\n";
+                return;
+            }
             std::stringstream ss(line);
             if (!(ss >> choice) || ss.rdbuf()->in_avail() != 0)
             {
