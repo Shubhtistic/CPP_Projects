@@ -208,6 +208,16 @@ std::vector<std::pair<std::string, size_t>> log_query::topN(const std::string &f
                 // to check if we really are adding non empty ips
             }
         }
+        else if (field == "level")
+        {
+            topn_hash[logs.log_level]++;
+            // Use the correct member name
+        }
+        else if (field == "message")
+        {
+            topn_hash[logs.message]++;
+            // Use the correct member name
+        }
     }
 
     // now lets create an vector to sort the keys of the map
