@@ -12,7 +12,7 @@ public:
     std::string return_parser_name() const override;
 
 private:
-    std::regex nginx_pattern_;
+    std::regex nginx_pattern;
 
     std::optional<std::chrono::system_clock::time_point> parse_nginx_timestamp(const std::string &timestamp_str);
     const std::string parser_name="NGINX Log Parser";
