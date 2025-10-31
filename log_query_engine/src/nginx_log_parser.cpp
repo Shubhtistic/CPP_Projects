@@ -4,6 +4,8 @@
 #include <map>
 #include <regex>
 #include <ctime>
+#include <iostream>
+#include <chrono>
 
 std::optional<std::chrono::system_clock::time_point> nginx_log_parser::parse_nginx_timestamp(const std::string &timestamp_str)
 {
@@ -28,7 +30,7 @@ std::optional<std::chrono::system_clock::time_point> nginx_log_parser::parse_ngi
     }
     tm.tm_mon = month_map.at(month_str);
 
-    if (!(ss >> std::get_time(&tm, "/%Y:%H:%M:%S")))
+    if (!(ss >> std::get_time(&tm, "/%Y:%H:%M:%S %z")))
     {
         return std::nullopt;
     }
@@ -43,8 +45,8 @@ std::optional<std::chrono::system_clock::time_point> nginx_log_parser::parse_ngi
 }
 
 nginx_log_parser::nginx_log_parser()
-    : nginx_pattern_(
-          R"REGEX(^([\da-fA-F:.]+)\s+-\s+(\S+)\s+\[(.*?)\]\s+"((?:\\.|[^"\\])*)"\s+(\d{3})\s+(\S+)(?:\s+"((?:\\.|[^"\\])*)"\s+"((?:\\.|[^"\\])*)")?$)REGEX")
+    : nginx_pattern(
+          R"REGEX(^([\d.]+|[\da-fA-F:]+)\s+(\S+)\s+(\S+)\s+\[(.*?)\]\s+"((?:\\.|[^"\\])*)"\s+(\d{3})\s+(\d+|-)(?:\s+"((?:\\.|[^"\\])*)"\s+"((?:\\.|[^"\\])*)")?.*$)REGEX")
 {
 }
 
@@ -53,16 +55,13 @@ std::string nginx_log_parser::return_parser_name() const
     return parser_name;
 }
 
-// --- parse_line ---
-// This is the core logic that attempts to parse one line of an Nginx log.
 std::optional<log> nginx_log_parser::parse_line(const std::string &line)
 {
 
-    std::smatch matches; 
+    std::smatch matches;
 
-    if (std::regex_match(line, matches, nginx_pattern_))
+    if (std::regex_match(line, matches, nginx_pattern))
     {
-
         if (matches.size() < 8)
         {
             return std::nullopt;
@@ -83,12 +82,14 @@ std::optional<log> nginx_log_parser::parse_line(const std::string &line)
         }
         catch (const std::exception &e)
         {
+            std::cerr << "Warning: Failed to convert status/bytes in line: " << line << std::endl;
             return std::nullopt;
         }
 
         auto time_point_opt = parse_nginx_timestamp(timestamp_str);
         if (!time_point_opt.has_value())
         {
+            std::cerr << "Warning: Failed to parse timestamp in line: " << line << std::endl;
             return std::nullopt;
         }
 
