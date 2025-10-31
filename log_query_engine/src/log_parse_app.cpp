@@ -1,8 +1,7 @@
 #include "log_parse_app.h"
-#include "simple_log_parser.h"
-// our very first parser
-
+#include "simple_log_parser.h" // our very first parser
 #include "apache_log_parser.h"
+#include "nginx_log_parser.h"
 #include <iostream>
 #include <limits>
 #include <memory>
@@ -18,6 +17,7 @@ log_parse_app::log_parse_app() : query_engine(log_store)
     // now lets push some parser into the vector
     auto simple_parser = std::make_unique<simple_log_parser>();
     auto apache_parser = std::make_unique<apache_log_parser>();
+    auto nginx_parser = std::make_unique<nginx_log_parser>();
 
     // make an simple log parser on the heap and gives it unique ptr to simple parser
 
@@ -26,6 +26,7 @@ log_parse_app::log_parse_app() : query_engine(log_store)
     // std::move transfers ownership to new ptr and assigns old ptr to 'nullptr'
     available_parsers.push_back(std::move(simple_parser));
     available_parsers.push_back(std::move(apache_parser));
+    available_parsers.push_back(std::move(nginx_parser));
 }
 
 void log_parse_app::load_logFile()
@@ -138,11 +139,16 @@ log_parser *log_parse_app::select_parser()
 
         if (parser_name == "Simple Log parser")
         {
-            std::cout << "     Format: [YYYY-MM-DD HH:MM:SS] LEVEL - Message [- IP: x.x.x.x] (IP is optional)\n";
+            std::cout << "Format: [YYYY-MM-DD HH:MM:SS] LEVEL - Message [- IP: x.x.x.x] (IP is optional)\n";
         }
         else if (parser_name == "Apache Log Parser")
         {
-            std::cout << "     Format: IP - - [DD/Mon/YYYY:...] \"Request\" Status Bytes\n";
+            std::cout << "Format: IP - - [DD/Mon/YYYY:...] \"Request\" Status Bytes\n";
+        }
+
+        else if (parser_name == "Nginx Log Parser")
+        {
+            std::cout << "Format: IP - - [DD/Mon/YYYY:...] \"Request\" Status Bytes (Similar to Apache)\n";
         }
         // more elif blocks if we add more
     }
