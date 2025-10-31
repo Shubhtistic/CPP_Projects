@@ -1,8 +1,3 @@
-Okay, understood. I will not change any of the existing content you provided. I will create a new, detailed section about the parsers and their specific logic and limitations, and I will insert it strategically into the `README.md`.
-
-Here is the complete, updated `README.md` file in a single Markdown block.
-
-````markdown
 # High-Performance C++ Log Query Engine 📈
 
 ## 📝 Summary
@@ -152,4 +147,3 @@ The application is run without any initial arguments and provides an interactive
 3.  When prompted, enter the full path to the log file you wish to analyze (e.g., `~/Downloads/apache.log`).
 4.  Select the appropriate parser for your log file format from the menu.
 5.  Once the file is loaded, select **"Analyze Loaded Data"** to enter the interactive query prompt.
-````
