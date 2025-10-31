@@ -3,10 +3,10 @@
 #include <regex>
 #include <string>
 
-class ApacheLogParser : public log_parser
+class apache_log_parser : public log_parser
 {
 public:
-    ApacheLogParser();
+    apache_log_parser() : apache_pattern(R"(^([\d.]+|[\da-fA-F:]+)\s+(\S+)\s+(\S+)\s+\[(.*?)\]\s+\"(.*?)\"\s+(\d{3})\s+(\d+|-)(?:\s+\"(.*?)\"\s+\"(.*?)\")?.*$)") {}
 
     // The override keyword is a safety check that ensures we are
     // correctly implementing a virtual function from the base class.
@@ -15,9 +15,9 @@ public:
     std::string return_parser_name() const override;
 
 private:
-    std::regex apache_pattern_;
+    std::regex apache_pattern;
 
     std::optional<std::chrono::system_clock::time_point> parse_apache_timestamp(const std::string &timestamp_str);
 
-    const std::string PARSER_NAME = "Apache Log Parser";
+    const std::string parser_name = "Apache Log Parser";
 };
