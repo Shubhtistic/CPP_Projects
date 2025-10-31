@@ -146,7 +146,7 @@ log_parser *log_parse_app::select_parser()
             std::cout << "Format: IP - - [DD/Mon/YYYY:...] \"Request\" Status Bytes\n";
         }
 
-        else if (parser_name == "Nginx Log Parser")
+        else if (parser_name == "NGINX Log Parser")
         {
             std::cout << "Format: IP - - [DD/Mon/YYYY:...] \"Request\" Status Bytes (Similar to Apache)\n";
         }
