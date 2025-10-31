@@ -1,6 +1,8 @@
 #include "log_parse_app.h"
 #include "simple_log_parser.h"
 // our very first parser
+
+#include "apache_log_parser.h"
 #include <iostream>
 #include <limits>
 #include <memory>
@@ -15,12 +17,15 @@ log_parse_app::log_parse_app() : query_engine(log_store)
 
     // now lets push some parser into the vector
     auto simple_parser = std::make_unique<simple_log_parser>();
+    auto apache_parser = std::make_unique<apache_log_parser>();
+
     // make an simple log parser on the heap and gives it unique ptr to simple parser
 
     // now we push back this into our vector of parsers
     // IMP NOTE: with unique ptrs we need to use std::move because unique ptrs can be copied they can only be moved
     // std::move transfers ownership to new ptr and assigns old ptr to 'nullptr'
     available_parsers.push_back(std::move(simple_parser));
+    available_parsers.push_back(std::move(apache_parser));
 }
 
 void log_parse_app::load_logFile()
@@ -119,25 +124,30 @@ log_parser *log_parse_app::select_parser()
 {
     if (available_parsers.empty())
     {
-        std::cerr << "Currenltly There are no log parsers configured.\n";
+        std::cerr << "Critical Error: No log parsers are configured.\n";
         return nullptr;
     }
-    std::cout << "Please Enter the log format to use\n";
+
+    std::cout << "\nPlease select the log format of the file:\n";
+
     for (int i = 0; i < available_parsers.size(); ++i)
     {
-        std::cout << "  " << i + 1 << ". " << available_parsers[i]->return_parser_name() << "\n";
-        if (available_parsers[i]->return_parser_name() == "Simple Log parser")
-        {
-            std::cout << " Format: [YYYY-MM-DD HH:MM:SS] LEVEL - Message [- IP: x.x.x.x] (IP is optional)\n";
-        }
+        std::string parser_name = available_parsers[i]->return_parser_name();
 
-        // for apache log parser
-        //    else if (parsers_[i]->getName() == "ApacheLogParser") {
-        //      std::cout << "     Format: IP - - [DD/Mon/YYYY:HH:MM:SS +ZZZZ] \"Request\" Status Bytes\n";
-        // }
+        std::cout << "\n  " << i + 1 << ". " << parser_name << "\n";
+
+        if (parser_name == "Simple Log parser")
+        {
+            std::cout << "     Format: [YYYY-MM-DD HH:MM:SS] LEVEL - Message [- IP: x.x.x.x] (IP is optional)\n";
+        }
+        else if (parser_name == "Apache Log Parser")
+        {
+            std::cout << "     Format: IP - - [DD/Mon/YYYY:...] \"Request\" Status Bytes\n";
+        }
+        // more elif blocks if we add more
     }
 
-    std::cout << "From the Above list, Enter your choice (A Number): ";
+    std::cout << "\nFrom the Above list, Enter your choice (A Number): ";
 
     int choice_num = 0;
     std::string line;
@@ -151,7 +161,7 @@ log_parser *log_parse_app::select_parser()
     }
 
     int index_chosen = choice_num - 1;
-    if (index_chosen < available_parsers.size())
+    if (index_chosen >= 0 && index_chosen < available_parsers.size())
     {
         return available_parsers[index_chosen].get();
     }
@@ -380,49 +390,49 @@ void log_parse_app::run()
 {
     std::cout << "--- Welcome to the C++ Log Query Engine ---" << std::endl;
 
-    // The main application loop. Continues until the user chooses to exit.
+    // In log_parse_app::run()
     while (true)
     {
-        // 1. Display the main menu options.
         std::cout << "\n           --- Main Menu ---          \n";
         std::cout << "1. Load a New Log File\n";
         std::cout << "2. Analyze Loaded Data\n";
         std::cout << "3. Exit\n";
         std::cout << "Please enter your choice: ";
+
         int choice = 0;
         std::string line;
 
-        // using getline + stringstream for input
+        // Get the input first
         if (!std::getline(std::cin, line))
         {
+            // Handle Ctrl+D or a real input error
             if (std::cin.eof())
-            { // Handle Ctrl+D (end of input)
-                std::cout << "\nExiting query loop.\n";
+            {
+                std::cout << "\nExiting...\n";
                 return;
             }
-            std::stringstream ss(line);
-            if (!(ss >> choice) || ss.rdbuf()->in_avail() != 0)
-            {
-                choice = 0;
-                // if invalid we the also keep choice variabe in invalid state
-            }
+            continue; // Other error, try again
+        }
+
+        // getline was suucefull lets parse the line
+        std::stringstream ss(line);
+        if (!(ss >> choice) || ss.rdbuf()->in_avail() != 0)
+        {
+            choice = 0; // Set to invalid choice if parsing fails
         }
 
         switch (choice)
         {
         case 1:
-            // Call the private helper function to handle loading.
             load_logFile();
             break;
         case 2:
-            // check if data was loaded
             if (log_store.get_logs().empty())
             {
                 std::cerr << "\nError:- No log Data is loaded until now, please load an file first\n";
             }
             else
             {
-                // Call the private helper function to run the query loop.
                 run_queryLoop();
             }
             break;
