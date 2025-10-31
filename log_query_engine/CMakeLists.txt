@@ -16,6 +16,8 @@ add_executable(log_query_engine
     src/log_query.cpp
     src/log_vector.cpp
     src/simple_log_parser.cpp
+    src/nginx_log_parser.cpp
+    src/apache_log_parser.cpp
 )
 
 
