@@ -4,10 +4,15 @@
 #include <unordered_map>
 #include <regex>
 
+apache_log_parser::apache_log_parser()
+    : apache_pattern(
+          R"REGEX(^([\d.]+|[\da-fA-F:]+)\s+(\S+)\s+(\S+)\s+\[(.*?)\]\s+"((?:\\.|[^"\\])*)"\s+(\d{3})\s+(\d+|-)(?:\s+"((?:\\.|[^"\\])*)"\s+"((?:\\.|[^"\\])*)")?.*$)REGEX")
+{
+}
+
 // This function parses the unique Apache timestamp format
 std::optional<std::chrono::system_clock::time_point> apache_log_parser::parse_apache_timestamp(const std::string &timestamp_str)
 {
-
     static const std::unordered_map<std::string, int> month_map = {
         {"Jan", 0}, {"Feb", 1}, {"Mar", 2}, {"Apr", 3}, {"May", 4}, {"Jun", 5}, {"Jul", 6}, {"Aug", 7}, {"Sep", 8}, {"Oct", 9}, {"Nov", 10}, {"Dec", 11}};
 
@@ -53,7 +58,6 @@ std::string apache_log_parser::return_parser_name() const
 // This is the core logic that attempts to parse one line of an Apache log.
 std::optional<log> apache_log_parser::parse_line(const std::string &line)
 {
-
     std::smatch matches;
     // regex mde container
 
