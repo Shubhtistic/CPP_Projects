@@ -3,6 +3,9 @@
 #include <iomanip>
 #include <unordered_map>
 #include <regex>
+#include <ctime>
+#include <chrono>
+#include <iostream>
 
 apache_log_parser::apache_log_parser()
     : apache_pattern(
@@ -36,7 +39,8 @@ std::optional<std::chrono::system_clock::time_point> apache_log_parser::parse_ap
 
     // remaininy part of the string i.e after day/month
     // afer that there is an actual time stamp
-    if (!(ss >> std::get_time(&tm, "/%Y:%H:%M:%S")))
+
+    if (!(ss >> std::get_time(&tm, "/%Y:%H:%M:%S %z")))
     {
         return std::nullopt;
     }
@@ -55,7 +59,6 @@ std::string apache_log_parser::return_parser_name() const
     return parser_name;
 }
 
-// This is the core logic that attempts to parse one line of an Apache log.
 std::optional<log> apache_log_parser::parse_line(const std::string &line)
 {
     std::smatch matches;
@@ -87,12 +90,14 @@ std::optional<log> apache_log_parser::parse_line(const std::string &line)
         }
         catch (const std::exception &e)
         {
+            std::cerr << "Warning: Failed to convert status/bytes in line: " << line << std::endl;
             return std::nullopt;
         }
 
         auto time_point_opt = parse_apache_timestamp(timestamp_str);
         if (!time_point_opt.has_value())
         {
+            std::cerr << "Warning: Failed to parse timestamp in line: " << line << std::endl;
             return std::nullopt;
         }
 
