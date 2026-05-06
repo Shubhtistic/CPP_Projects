@@ -1,51 +1,44 @@
-# My C++ Learning Journey & Portfolio 🚀
+# C++ Projects
 
-## 👋 Introduction
+A monorepo showcasing foundational to intermediate C++ projects. The work here demonstrates a progressive focus on core software architecture, object-oriented design, data processing, and systems programming.
 
-Welcome! I am a passionate software developer with a focus on building robust, high-performance backend systems and trying to explore the world of ML.
-
-This repository is a **monorepo** that serves as a showcase for my foundational C++ projects. It is designed to demonstrate a progressive journey, starting from core software architecture principles and moving towards more advanced topics like object-oriented design, data processing, and concurrency.
-
-My larger, "flagship" projects (such as my planned "Redis from Scratch" implementation) are housed in their own dedicated repositories.
+Larger standalone projects (such as a planned Redis implementation) are housed in their own dedicated repositories.
 
 ---
 
-## 📂 Project Index
+## Project Index
 
-| Project                                                                                              | Details                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🕷️ **[High-Performance Web Scraper]** | _(Planned)_ A complex systems project integrating networking with advanced concurrency via a custom **Thread Pool** (`std::thread`, `std::mutex`, `std::condition_variable`).                     |
-| 🔑 **[Networked Key-Value Store](https://github.com/Shubhtistic/CPP_Projects/tree/main/networked_kv_store)** |  A backend-focused in-memory database using efficient data structures (`std::unordered_map`), server-side socket programming, and a custom network protocol. |
-| 📊 **[Log Query Engine](https://github.com/Shubhtistic/CPP_Projects/tree/main/log_query_engine)** |  A high-performance, interactive CLI tool to analyze log files with a SQL-like query language, built on **STL Algorithms**, **Lambdas**, **Regex**, and a polymorphic parser design. |
-| 📈 **[Financial Trading Simulation](https://github.com/shubh4m-2k04/CPP_Projects/tree/main/financial_trade_simulation)** | A simulation demonstrating advanced **OOP** concepts, including **Polymorphism**, **Abstract Classes**, and modern memory management with **Smart Pointers**.                    |
-| ✅ **[To-Do List Application](https://github.com/shubh4m-2k04/CPP_Projects/tree/main/todo_app)** | A robust application demonstrating fundamentals in **File I/O**, **JSON Data Persistence**, **RAII**, and professional project structure with **CMake**.                      |
+| Project | Details |
+| --- | --- |
+| **[Networked Key-Value Store](https://github.com/Shubhtistic/CPP_Projects/tree/main/networked_kv_store)** | _(In Progress)_ A backend-focused in-memory database using efficient data structures (`std::unordered_map`), server-side socket programming, and a custom network protocol. |
+| **[Log Query Engine](https://github.com/Shubhtistic/CPP_Projects/tree/main/log_query_engine)** | An interactive CLI tool for analyzing log files with a SQL-like query language, built on STL algorithms, lambdas, regex, and a polymorphic parser design. |
+| **[Financial Trading Simulation](https://github.com/shubh4m-2k04/CPP_Projects/tree/main/financial_trade_simulation)** | A simulation demonstrating advanced OOP — polymorphism, abstract classes, and modern memory management with smart pointers. |
+| **[To-Do List Application](https://github.com/shubh4m-2k04/CPP_Projects/tree/main/todo_app)** | A CLI application covering File I/O, JSON persistence, RAII, and project structure with CMake. |
 
 ---
 
-## ⚙️ Prerequisites
-Please make sure you already have:
-- **C++17 compiler** (GCC/Clang/MSVC)
-- **CMake** (v3.14+)
-- **Git**
+## Prerequisites
 
-## 🚀 How to Build
+- C++17 compiler (GCC / Clang / MSVC)
+- CMake 3.14+
+- Git
 
-**This is a monorepo managed by CMake. You can build all projects at once, or a specific project by its target name.**
+---
 
-1.  **Clone the Repository:**
-    ```bash
-    git clone [https://github.com/Shubhtistic/CPP_Projects](https://github.com/Shubhtistic/CPP_Projects)
-    cd C++_Projects
-    ```
-2.  **Configure and Build:**
-    ```bash
-    mkdir build
-    cd build
-    cmake ..
-    make # This will build ALL projects
-    ```
-3.  **To build only a specific project (e.g., the To-Do app):**
-    ```bash
-    # From inside the 'build' directory
-    make todo_app
-    ```
+## Building
+
+This monorepo is managed by CMake and can be built in full or per project.
+
+```bash
+# Clone the repository
+git clone https://github.com/Shubhtistic/CPP_Projects
+cd CPP_Projects
+
+# Configure and build all projects
+mkdir build && cd build
+cmake ..
+make
+
+# Build a specific project
+make todo_app
+```

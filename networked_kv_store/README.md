@@ -1,12 +1,11 @@
-# 🔑 Networked Key-Value Store (Planned)
+# C++ Networked Key-Value Store
 
-**Status:** Work will start soon
+**Status: Work Will Start Soon ..**
 
-## Description
-A backend-focused in-memory database designed to provide fast key-value storage and retrieval. The project will explore efficient data structures, server-side socket programming, and a custom network protocol.
+A backend-focused in-memory database providing fast key-value storage and retrieval over a network connection. The project covers efficient data structures, server-side socket programming, and a custom network protocol.
 
-## Tech Stack (Planned)
-- **Language:** C++
-- **Core Concepts:** `std::unordered_map`, networking (sockets), in-memory storage
+## Planned Tech Stack
 
-> Note: Project is currently in the planning phase. Full implementation will follow soon.
+- **Language:** C++17
+- **Storage:** `std::unordered_map`
+- **Networking:** Server-side sockets, custom protocol
