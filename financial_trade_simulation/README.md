@@ -1,101 +1,92 @@
-  # C++ Financial Trading Simulation 📈
+# C++ Financial Trading Simulation
 
-  ## 📝 Summary
-  This is a sophisticated command-line trading simulation built in modern C++. It models a dynamic financial market with multiple types of assets, demonstrating a deep understanding of advanced Object-Oriented Programming (OOP), professional software architecture, and modern C++ practices.
+A command-line trading simulation built in modern C++. It models a dynamic financial market with multiple asset types, demonstrating advanced OOP, modern memory management, and a clean separation between application logic and data.
 
-  The core of this project is a powerful polymorphic design that allows different assets to be managed through a single, stable interface. The application is fully data-driven, loading its market configuration from an external CSV file, showcasing a clean separation between logic and data.
+The market is fully data-driven — assets are loaded from an external CSV file at runtime, so the configuration can be changed without recompiling.
 
-  ---
+---
 
-  ## ✨ Key Features
-  - **Data-Driven Market**: The list of tradable assets is not hard-coded but loaded from an external `market_assets.csv` file, allowing for easy configuration without recompiling.
-  - **Polymorphic Asset System**: The simulation seamlessly manages different asset types (`Stock`, `Bond`) with unique behaviors through a common `Asset` interface.
-  - **Dynamic Market Simulation**: A `TICK` command advances time, causing stock prices to fluctuate randomly and bonds to generate interest payments.
-  - **Full Portfolio Management**: Users can `BUY` and `SELL` assets, with all transactions affecting their cash balance and holdings.
-  - **Robust Command-Line Interface**: All user input is handled safely using a `getline` and `stringstream` pattern, preventing common input buffer errors.
+## Features
 
-  ---
+- **Data-Driven Market** — Tradable assets are loaded from `market_assets.csv` at startup, no hard-coded values
+- **Polymorphic Asset System** — `Stock` and `Bond` types are managed through a common `Asset` interface
+- **Dynamic Market Simulation** — A `TICK` command advances time, causing stock prices to fluctuate and bonds to accrue interest
+- **Portfolio Management** — `BUY` and `SELL` commands update cash balance and holdings in real time
+- **Robust Input Handling** — Uses a `getline` + `stringstream` pattern throughout to prevent input buffer errors
 
-  ## 🛠️ Core Concepts Demonstrated
-  This project was architected to be a deep dive into advanced C++ and software design principles.
+---
 
-  - **Software Architecture**:
-    - **Encapsulation & Application Class**: A top-level `Simulation` class encapsulates the entire program lifecycle (setup, run loop, teardown), simplifying the `main()` function to a clean entry point.
-    - **Separation of Concerns**: A clear distinction is maintained between application logic (`Simulation`), component logic (`Portfolio`), and configuration data (the external CSV file).
+## Core Concepts
 
-  - **Advanced Object-Oriented Programming (OOP)**:
-    - **Polymorphism & Inheritance**: An abstract `Asset` class defines a contract, with `Stock` and `Bond` providing specialized, derived implementations. The system interacts with all assets polymorphically via `Asset*` pointers.
-    - **RAII & Class Invariants**: Constructors are used to guarantee that all objects (`Portfolio`, `Simulation`) are created in a valid and usable state.
+**Architecture**
+- A top-level `Simulation` class encapsulates the full program lifecycle, keeping `main()` a clean entry point
+- Clear separation between application logic (`Simulation`), component logic (`Portfolio`), and configuration data (CSV)
 
-  - **Modern C++ Memory Management**:
-    - **Smart Pointers (`std::unique_ptr`)**: The `market` collection owns all master asset objects using `std::unique_ptr`, guaranteeing automatic cleanup and preventing memory leaks.
-    - **Non-Owning Raw Pointers**: The `Portfolio` correctly uses raw `Asset*` pointers as non-owning observers to reference assets, demonstrating a key design pattern for separating ownership from usage.
+**OOP**
+- Abstract `Asset` base class defines the interface; `Stock` and `Bond` provide specialized implementations
+- All assets are accessed polymorphically via `Asset*` pointers
+- Constructors enforce valid object state (RAII)
 
-  - **Data Handling & STL Mastery**:
-    - **CSV File Parsing**: Uses `std::ifstream` and `std::stringstream` to read and parse the external market data file at runtime.
-    - **`std::map`**: Used for the portfolio's holdings to provide efficient, O(log n) lookups of asset quantities.
-    - **`<random>` Library**: Employs the modern C++ random library for a high-quality simulation of market volatility.
+**Memory Management**
+- `std::unique_ptr` owns all master asset objects in the `market` collection — automatic cleanup, no leaks
+- `Portfolio` uses non-owning raw `Asset*` pointers as observers, demonstrating the ownership vs. usage distinction
 
-  - **Professional C++ Practices**:
-    - **Robust Input Handling**: Consistently uses a `getline` + `stringstream` pattern to create a reliable and crash-proof user interface.
-    - **`const`-Correctness**: `const` is applied rigorously on member functions and parameters to enforce safety and express design intent.
-    - **Modular Project Structure**: The project is cleanly separated into `src/` (implementation) and `include/` (header) directories.
-    - **Build Automation**: Uses a professional `CMakeLists.txt` file for easy compilation on any platform.
+**Data & STL**
+- CSV parsed at runtime using `std::ifstream` and `std::stringstream`
+- `std::map` used for portfolio holdings — O(log n) lookups
+- `<random>` library used for market volatility simulation
 
-  ---
+**C++ Practices**
+- `const`-correctness applied on member functions and parameters throughout
+- Modular structure: `src/` for implementation, `include/` for headers
+- CMake build system
 
-  ## ⚙️ Prerequisites
-  Please make sure you have the following installed:
-  - A C++17 compliant compiler (GCC, Clang, MSVC)
-  - CMake (version 3.10 or higher)
-  - Git
+---
 
-  ---
+## Prerequisites
 
-  ## 💻 Installation & Setup
-  The project requires a `market_assets.csv` file in the root directory to define the tradable assets. An example is provided in the repository.
+- C++17 compiler (GCC / Clang / MSVC)
+- CMake 3.10+
+- Git
 
-  ### 🔹 Linux & macOS
+---
 
-  1.  **Clone the repository and navigate to the project folder:**
-      ```bash
-      git clone git@github.com:Shubhtistic/CPP_Projects.git
-      cd C++_projects/financial_trade_simulation
-      ```
-  2.  **Create a build directory and compile:**
-      ```bash
-      mkdir build && cd build
-      cmake ..
-      make
-      ```
-  3.  **Run the application (from the `build` directory):**
-      ```bash
-      ./TradingSim
-      ```
+## Configuration
 
-  ### 🔹 Windows (Using PowerShell)
-  1.  **Clone the repository and navigate to the project folder:**
-      ```bash
-      git clone <your-repo-url>
-      cd <repo-folder>\financial-sim
-      ```
-  2.  **Create a build directory and compile:**
-      ```bash
-      mkdir build
-      cd build
-      cmake ..
-      cmake --build .
-      ```
-  3.  **Run the application (from the `build` directory):**
-      ```bash
-      .\Debug\TradingSim.exe
-      ```
+The market is configured via `market_assets.csv` in the project root. Expected format:
 
-  ---
+```csv
+TYPE,SYMBOL,PRICE,INTEREST_RATE
+Stock,GOOG,135.25,0
+Bond,US-BOND,1000.0,0.05
+```
 
-  ## ⚙️ Configuration
-  The market is configured via a `market_assets.csv` file located in the project's root directory. The application loads this file on startup. The expected format is:
-  ```csv
-  TYPE,SYMBOL,PRICE,INTEREST_RATE
-  Stock,GOOG,135.25,0
-  Bond,US-BOND,1000.0,0.05
+---
+
+## Build & Run
+
+### Linux / macOS
+
+```bash
+git clone git@github.com:Shubhtistic/CPP_Projects.git
+cd CPP_Projects/financial_trade_simulation
+
+mkdir build && cd build
+cmake ..
+make
+
+./TradingSim
+```
+
+### Windows (PowerShell)
+
+```bash
+git clone git@github.com:Shubhtistic/CPP_Projects.git
+cd CPP_Projects\financial_trade_simulation
+
+mkdir build && cd build
+cmake ..
+cmake --build .
+
+.\Debug\TradingSim.exe
+```
